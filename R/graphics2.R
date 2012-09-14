@@ -1,0 +1,125 @@
+require(ggplot2)
+theme_set(theme_bw(base_size = 11))
+
+##To get transparency on postscript files
+library(grDevices)
+
+#We want out the following percentiles
+stats = c(0.025, 0.25, 0.5, 0.75, 0.975)
+
+##Gillespie
+load("data_dd1.RData")
+quarts = tapply(dd1[,2], dd1[,1], quantile, stats)
+dd = Reduce("rbind", quarts)
+dd = as.data.frame(dd[1:nrow(dd),])
+colnames(dd) = paste("Q", 1:ncol(dd), sep="")
+dd$Time = unique(dd1$Time)
+dd$Simulator = "Gillespie"
+rm(dd1)
+
+##CLE
+load("data_dd2.RData")
+quarts = tapply(dd2[,2], dd2[,1], quantile, stats)
+dd_t = Reduce("rbind", quarts)
+dd_t = as.data.frame(dd_t[1:nrow(dd_t),])
+colnames(dd_t) = paste("Q", 1:ncol(dd_t), sep="")
+dd_t$Time = unique(dd2$Time)
+dd_t$Simulator = "CLE"
+rm(dd2)
+
+dd = rbind(dd, dd_t)
+##LNA 1
+load("data_dd3.RData")
+quarts = tapply(dd3[,2], dd3[,1], quantile, stats)
+dd_t = Reduce("rbind", quarts)
+dd_t = as.data.frame(dd_t[1:nrow(dd_t),])
+colnames(dd_t) = paste("Q", 1:ncol(dd_t), sep="")
+dd_t$Time = unique(dd3$Time)
+dd_t$Simulator = "LNA 1"
+rm(dd3)
+dd = rbind(dd, dd_t)
+
+##LNA 2
+load("data_dd4.RData")
+quarts = tapply(dd4[,2], dd4[,1], quantile, stats)
+dd_t = Reduce("rbind", quarts)
+dd_t = as.data.frame(dd_t[1:nrow(dd_t),])
+colnames(dd_t) = paste("Q", 1:ncol(dd_t), sep="")
+dd_t$Time = unique(dd4$Time)
+dd_t$Simulator = "LNA 2"
+rm(dd4)
+dd = rbind(dd, dd_t)
+
+
+##Construct the plot
+dd$Simulator = factor(dd$Simulator,
+  labels=c("Gillespie", "CLE", "LNA Method 1", "LNA Method 2"),
+  levels=c("Gillespie","CLE",  "LNA 1", "LNA 2"))
+
+g =  ggplot(dd, aes(Time))
+g = g +
+  geom_ribbon(aes(ymin=Q1, ymax=Q5), fill="grey70",alpha=0.4) +
+  geom_ribbon(aes(ymin=Q2, ymax=Q4), fill="grey60",alpha=0.4) +
+  geom_line(aes(y=Q3)) + facet_wrap( ~Simulator, ncol=2) +
+  ylab("Prey Population")
+g
+
+#Save the figures
+#Transparent eps file
+cairo_ps("../graphics/figure2.eps", width=6,height=4.5)
+print(g)
+dev.off()
+
+pdf("../graphics/figure2.pdf", width=6,height=4.5)
+print(g)
+dev.off()
+
+
+
+
+###################################
+###################################
+###################################
+#The following code runs 10000 simulations using each of the simulators
+#This can take a while!
+#The function sim_summary_stats runs in parallel.
+#Use the no_cores option to specify the no_cores you want to use
+source("gillespie.R")
+source("diffusion.R")
+source("lna.R")
+source("sim_summary.R")
+source("LV.R")
+
+initial = c(10, 10)
+pars = c(1.75, 0.001)
+maxtime = 10
+tstep = 0.05
+no_sims = 10000
+
+
+##Gillespie
+dd1 = as.data.frame(sim_summary_stats(initial, pars, maxtime,
+  tstep, no_sims,no_cores=3, gill))
+dd1$type = "Gillespie"
+save(dd1, file="data_dd1.RData")
+rm(dd1)
+
+##CLE
+dd2 = as.data.frame(sim_summary_stats(initial, pars, maxtime,
+  tstep, no_sims, no_cores=4, cle, 0.01))
+dd2$type = "CLE"
+save(dd2, file="data_dd2.RData")
+
+
+##LNA 1
+dd3 = as.data.frame(sim_summary_stats(initial, pars, maxtime,
+  tstep, no_sims, no_cores=3, lnasol, c(0,0), diag(c(0,0)), 0.05))
+dd3$type = "LNA 1"
+save(dd3, file="data_dd3.RData")
+rm(dd3)
+
+##LNA 2
+dd4 = as.data.frame(sim_summary_stats(initial, pars, maxtime,
+  tstep, no_sims, no_cores=3,lnasol2, c(0,0), diag(c(0,0)),0.05))
+dd4$type = "LNA 2"
+save(dd4, file="data_dd4.RData")
