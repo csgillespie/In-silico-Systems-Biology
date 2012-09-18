@@ -521,7 +521,8 @@ for further details and \cite{golightly11} for a recent discussion.
   W_t$, with $i$th entry a $\textrm{N}(0,\Delta t)$ random quantity.
 \item Update the state according to 
 \[
-x := x+S\,h(x,c)\Delta t +S\operatorname{diag}\left\{\sqrt{h(X_t,c)}\right\}\,\Delta W_t
+x := x+S\,h(x,c)\Delta t +
+S\operatorname{diag}\left\{\sqrt{h(X_t,c)}\right\}\,\Delta W_t
 \]
 \item Update $t:=t+\Delta t$
 \item Output $t$ and $x$. If $t<T_{max}$ return to step 2.
@@ -550,9 +551,8 @@ A system at time $t$ can therefore be stepped to $t+\Delta t$ via
 \[
 \left(X_{t+\Delta t}|X_{t}=x\right)\sim \textrm{N}\left(x+\mu(x)\Delta t\,,\,\sigma(x)\sigma(x)'\Delta t\right).
 \] 
-Algorithm \ref{A3} describes the procedure for numerically integrating the 
-CLE. Note that for simplicity, we use the form of the CLE given in (\ref{cle0}).
-
+Algorithm \ref{A3} describes the procedure for numerically integrating the CLE.
+Note that for simplicity, we use the form of the CLE given in (\ref{cle0}).
 
 As for ODEs, higher order numerical methods (such as the Milstein scheme) can be
 implemented for SDEs but are less widely used due to the complexity of the
@@ -573,12 +573,13 @@ reader for further details.
 \item Set $t=0$. Initialise the rate constants and the initial molecule numbers
   $x$. Set $z_{0}=x$, $m_{0}=x-z_{0}$ (i.e. a vector of zeros) and $V_{0}$ as
   the $u\times u$ matrix, with all entries equal to zero.
-\item Numerically integrate the system of ODEs satisfied by $z_t$, $m_t$ and $V_t$ over 
-$[t,t+\Delta t]$.
-\item Update the state by drawing $x$ from a $\textrm{N}\left(\Omega z_{t+\Delta t}+\sqrt{\Omega}m_{t+\Delta t}\,,\, \Omega V_{t+\Delta t}\right)$ 
-distribution.
-\item Update $t:=t+\Delta t$. Set $m_{t}=x-z_{t}$ and 
-$V_{t}$ as the $u\times u$ matrix, with all entries equal to zero.  
+\item Numerically integrate the system of ODEs satisfied by $z_t$, $m_t$ and
+  $V_t$ over $[t,t+\Delta t]$.
+\item Update the state by drawing $x$ from a $\textrm{N}\left(\Omega z_{t+\Delta
+      t}+\sqrt{\Omega}m_{t+\Delta t}\,,\, \Omega V_{t+\Delta t}\right)$
+  distribution.
+\item Update $t:=t+\Delta t$. Set $m_{t}=x-z_{t}$ and $V_{t}$ as the $u\times u$
+  matrix, with all entries equal to zero.
 \item Output $t$ and $x$. If $t<T_{max}$ return to step 2.
 \end{enumerate}
 \end{algorithm}
@@ -598,7 +599,7 @@ X_t = \Omega z_{t}+\sqrt{\Omega}M_{t}.
 \end{equation}
 Substituting into equation~(\ref{lna1}) gives
 \begin{equation}\label{lna2}
-d z_{t}+\frac{1}{\sqrt{\Omega}}dM_{t} = S\, f(z_t+M_t /\sqrt{\Omega},c)dt + \frac{1}{\sqrt{\Omega}}\sqrt{S\textrm{diag}\{f(z_t+M_t /\sqrt{\Omega},c)\}S'}dW_t.
+  d z_{t}+\frac{1}{\sqrt{\Omega}}dM_{t} = S\, f(z_t+M_t /\sqrt{\Omega},c)dt + \frac{1}{\sqrt{\Omega}}\sqrt{S\textrm{diag}\{f(z_t+M_t /\sqrt{\Omega},c)\}S'}dW_t.
 \end{equation}
 We then Taylor expand the rate function around $z_t$ to give
 \begin{equation}\label{lna3}
@@ -722,8 +723,6 @@ probability density of the ``next reaction'' algorithm is used compute the times
 of the slow reaction events. Discrete/CLE simulation strategies in the context
 of a simple gene regulatory system have been considered by \cite{higham2011}
 whilst \cite{kiehl2004} and \cite{alfonsi2005} consider discrete/ODE approaches.
-For a concise introduction to hybrid schemes, we refer the reader to
-\cite{Wilkinson06}.
 
    
 \section{Example: Lotka-Volterra}
@@ -735,13 +734,13 @@ Table~\ref{tab:tab2}.
 \begin{table}[t]
 \centering
 \begin{tabular}{@{}llll@{}}
-\toprule
-Label  & Reaction &  Hazard & Description\\
-\midrule
-$R_{1}$ & $\mathcal{X}_{1}\xrightarrow{\phantom{a}c_{1}\phantom{a}}  2\mathcal{X}_{1}$ & $c_{1}X_{1}$ & Prey reproduction\\
-$R_{2}$ & $\mathcal{X}_{1}+\mathcal{X}_{2}\xrightarrow{\phantom{a}c_{2}\phantom{a}}  2\mathcal{X}_{2}$ & $c_{2}X_{1}X_{2}$ & Prey death, predator reproduction\\
-$R_{3}$ & $\mathcal{X}_{2}\xrightarrow{\phantom{a}c_{3}\phantom{a}}  \emptyset$ & $c_{3}X_{2}$ & Predator death\\
-\bottomrule
+  \toprule
+  Label  & Reaction &  Hazard & Description\\
+  \midrule
+  $R_{1}$ & $\mathcal{X}_{1}\xrightarrow{\phantom{a}c_{1}\phantom{a}}  2\mathcal{X}_{1}$ & $c_{1}X_{1}$ & Prey reproduction\\
+  $R_{2}$ & $\mathcal{X}_{1}+\mathcal{X}_{2}\xrightarrow{\phantom{a}c_{2}\phantom{a}}  2\mathcal{X}_{2}$ & $c_{2}X_{1}X_{2}$ & Prey death, predator reproduction\\
+  $R_{3}$ & $\mathcal{X}_{2}\xrightarrow{\phantom{a}c_{3}\phantom{a}}  \emptyset$ & $c_{3}X_{2}$ & Predator death\\
+  \bottomrule
 \end{tabular}
 \caption{Reaction list and hazards for the Lotka-Volterra system.}\label{tab:tab2}
 \end{table} 
@@ -815,7 +814,7 @@ the stochastic mean and the deterministic solution do not coincide.
   \caption{Median (solid), inter-quartile range (inner shaded region), upper and
     lower 2.5 percentiles (outer shaded region) based on $10^4$ stochastic
     realisations of the Lotka-Volterra system using (a) Gillespie's direct
-    method, (b) the CLE with $\Delta t=0.01$ (c) the LNA (algorithm~\ref{A4}) and (d)
+    method, (b) the CLE with $\Delta t=0.01$, (c) the LNA (algorithm~\ref{A4}) and (d)
     the LNA (algorithm~\ref{A5}).}\label{fig:fig2}
 \end{figure}
 
