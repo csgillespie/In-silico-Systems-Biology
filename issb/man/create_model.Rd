@@ -2,7 +2,8 @@
 \alias{create_model}
 \title{A mechanism for creating a stochastic kinetic model (skm)}
 \usage{
-  create_model(stoic, hazards, initial, pars)
+  create_model(stoic, hazards, initial, pars,
+    jacobian = NULL)
 }
 \arguments{
   \item{stoic}{the stoichiometric of the skm model. The
@@ -15,6 +16,9 @@
   of the model.}
 
   \item{pars}{a vector containing the parameter vector}
+
+  \item{jacobian}{only needed when simulating from the
+  linear noise approximation}
 }
 \value{
   A list with class skm
@@ -23,26 +27,7 @@
   A mechanism for creating a stochastic kinetic model (skm)
 }
 \examples{
-#The Lokta-Volterra model
-#A hazard function
-h = function(x, pars) {
-    hazs = numeric(length(pars))
-    hazs[1] = pars[1]*x[1]
-    hazs[2] = pars[2]*x[1]*x[2]
-    hazs[3] = pars[3]*x[2]
-    return(hazs)
-}
-#The stoichiometric matrix
-smat = matrix(0,nrow=2,ncol=3)
-smat[1,1] = 1
-smat[1,2] = -1
-smat[2,2] = 1
-smat[2,3] = -1
-rownames(smat) = c("Prey", "Predator")
-#Build the model
-initial = c(100, 100)
-pars = c(0.5,0.0025,0.3)
-m = create_model(smat, hars, initial, pars)
+demo(lv)
 }
 \author{
   Colin Gillespie

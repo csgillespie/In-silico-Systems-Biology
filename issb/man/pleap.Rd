@@ -20,7 +20,8 @@
   A simple poisson leap method
 }
 \examples{
-
+demo(lv)
+pleap(model, 10, 0.1)
 }
 \author{
   Colin Gillespie

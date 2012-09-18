@@ -20,7 +20,7 @@
 }
 \examples{
 demo(lv)
-gillespie(m, 10)
+gillespie(model, 10)
 }
 \author{
   Colin Gillespie
