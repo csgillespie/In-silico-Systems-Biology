@@ -7,7 +7,7 @@
 #' @keywords character
 #' @export
 #' @examples demo(lv)
-#' gillespie(m, 10)
+#' gillespie(model, 10)
 
 
 

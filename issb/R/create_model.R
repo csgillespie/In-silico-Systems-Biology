@@ -9,7 +9,7 @@
 #' @return A list with class skm
 #' @keywords character
 #' @export
-#' @example ../examples/lv.R
+#' @examples demo(lv)
 
 create_model = function(stoic, hazards, initial, pars, jacobian=NULL) {
     initial = initial
@@ -19,10 +19,10 @@ create_model = function(stoic, hazards, initial, pars, jacobian=NULL) {
     get_haz = function(x, p=pars)  hazards(x, p)
     get_pars = function(p=pars)  p
     get_initial = function(i = initial) i
-    get_f = function(f = jacobian) f
+    get_jacobian = function(x, p=pars) jacobian(x, p)
     m =list(get_stoic = get_stoic, get_haz=get_haz, 
             get_pars=get_pars, get_initial=get_initial, 
-            get_f = joobian)
+            get_jacobian = get_jacobian)
     class(m) = "skm"
     return(m)
 }

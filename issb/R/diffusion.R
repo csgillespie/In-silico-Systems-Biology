@@ -8,7 +8,7 @@
 #' @keywords character
 #' @export
 #' @examples demo(lv)
-#' diffusion(m, 10, 0.05)
+#' diffusion(model, 10, 0.05)
 
 diffusion = function(model, maxtime, ddt)
 {

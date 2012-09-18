@@ -9,23 +9,22 @@ compare_time = function(curr_l, curr_u, proposed) {
 #' @title Discretises simulator output
 #' @param dd a dataframe/matrix containing simulator output. The first column should be the simulation 
 #' time
-#' @param tstep output time stel
+#' @param tstep output time step
 #' @author Colin Gillespie
 #' @return  A matrix with the same number of columns as dd, discretised at time points: 0, 
 #' tstep, 2tstep, ...
 #' @keywords character
 #' @export
 #' @examples 
-#' set.seed(1)
 #' dd = data.frame(time = c(0, sort(runif(9))),  y=rpois(10, 2))
 #' discretise(dd, 0.1)
 discretise = function(dd, tstep) {
   time = tstep
-  dd_dis = matrix(0, ncol=ncol(dd), nrow=ceiling(max(dd[,1])/tstep))
+  dd_dis = matrix(0, ncol=ncol(dd), nrow=ceiling(max(dd[,1]+tstep/2)/tstep))
   colnames(dd_dis) = colnames(dd)
   dd_dis[1,] = as.numeric(dd[1,])
   
-  j = 2;i=1
+  j = 2
   for(i in 1:(nrow(dd)-1)) {
     while(compare_time(dd[i,1], dd[i+1, 1], time)) {
       dd_dis[j,] = c(time, dd[i, 2:ncol(dd)])
@@ -33,7 +32,6 @@ discretise = function(dd, tstep) {
       j = j + 1
     }
   }
-  dd_dis
   return(dd_dis)
 }
 

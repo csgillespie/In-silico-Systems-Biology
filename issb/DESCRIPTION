@@ -11,7 +11,9 @@ Description: R code associated with the book chapter "Simulation of stochastic
     approach to understanding biological processes"" by Humana Press. This
     package provides a simple interface to simulating tochastic kinetic models.
 Depends:
-    deSolve, MASS
+    deSolve,
+    MASS,
+    parallel
 License: GPL
 Collate:
     'create_model.R'
@@ -21,3 +23,4 @@ Collate:
     'lna.R'
     'pleap.R'
     'discretise.R'
+    'sim_summary.R'

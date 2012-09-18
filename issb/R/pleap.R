@@ -7,7 +7,7 @@
 #' @keywords character
 #' @export
 #' @examples demo(lv)
-#' pleap(m, 10)
+#' pleap(model, 10, 0.1)
 
 pleap = function(model, maxtime, ddt)  
 {
@@ -16,8 +16,8 @@ pleap = function(model, maxtime, ddt)
     
     N = maxtime/ddt + 1
     v = length(pars)
-    xmat = matrix(0, nrow=N, ncol=length(x))
     x = model$get_initial()
+    xmat = matrix(0, nrow=N, ncol=length(x))
     xmat[1,] = x
     for (i in 2:N){
         h = model$get_haz(x)
