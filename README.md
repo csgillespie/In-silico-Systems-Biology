@@ -5,14 +5,8 @@ The latex and R code used in book chapter in "In silico Systems Biology:  A syst
 
 ### Latex code
 
-The latex code should compile using either *latex* or *pdflatex*. The figures are found in the graphics directory as both eps and pdf files.
+The latex code should compile using either *latex* or *pdflatex*. The figures are found in the graphics directory. The graphics directory contains both eps and pdf graphic files.
 
 ### R code
 
-The R code used in this chapter is found in the R directory. The code is not meant for *industrial style* stochastic simulation. Rather, it is used to illustrate algorithms described in the chapter. The **R** directory contains the following files:
- * gillespie.R, pleap.R, deterministic.R, diffusion.R, lna.R: These files contain the simulator algorithms. 
- *  LV.R: the model specification used in by the simulators
- *  examples.R: Example simulator function calls
- *  graphics1.R and graphics2.R: code used to construct the figures in the paper
- *  sim_summary.R: A function that can uses Rs parallel capabilities to simulate multiple instances.
-
+The R code used in this chapter is found in the R directory. The code is not meant for *industrial style* stochastic simulation. Rather, it is used to illustrate algorithms described in the chapter. The code has been placed into a simple R package. More details to follow.
