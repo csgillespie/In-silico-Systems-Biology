@@ -23,4 +23,4 @@ Collate:
     'lna.R'
     'pleap.R'
     'discretise.R'
-    'sim_summary.R'
+    'multiple_sim.R'
