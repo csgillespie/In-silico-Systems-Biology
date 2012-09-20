@@ -17,14 +17,14 @@ lnastep = function(model, z, m, ddt)#z,m=c(0,0),V=diag(c(0,0)),pars,gridt=c(0,1)
 {
     u = length(z)
     state = c(z, m, rep(0, u^2))	
-    sol = ode(y=state, func=lnafun, times=c(0, ddt), parms=model)
+    sol = deSolve:::ode(y=state, func=lnafun, times=c(0, ddt), parms=model)
     
     #Remove first column and get just give the final row
     sol = sol[nrow(sol), -1]
     z = sol[1:u]
     m = sol[(u+1):(2*u)]
     V = matrix(sol[-(1:(2*u))], ncol=u)
-    return(list(z, m, V))
+    return(list(z=z, m=m, V=V))
 }
 
 #' @title Stochastic simulation using the linear noise approximation
@@ -43,6 +43,7 @@ lnastep = function(model, z, m, ddt)#z,m=c(0,0),V=diag(c(0,0)),pars,gridt=c(0,1)
 
 lna = function(model, maxtime, ddt, restart=FALSE) 
 {
+
     z = model$get_initial()
     N = maxtime/ddt + 1	
     xmat = matrix(0, nrow=N, ncol=length(z))
@@ -53,48 +54,19 @@ lna = function(model, maxtime, ddt, restart=FALSE)
     V = matrix(0, length(z), length(z))
     for (i in 2:N){
         lsol = lnastep(model, z, m, ddt)
-        z = lsol[[1]]
-        m = lsol[[2]]
-        V = lsol[[3]]
-        
+        z = lsol[["z"]]
+                
         #Reflecting barrier
-        xmat[i,] = MASS:::mvrnorm(1, z+m,V)
+        xmat[i,] = MASS:::mvrnorm(1, z + lsol[["m"]], lsol[["V"]])
         neg = xmat[i,] < 0
         xmat[i,][neg] = xmat[i-1,][neg]
         
         ##Reinitialise
-        m = xmat[i,] - z #set m
-        if(restart){z = xmat[i,]; m = m*0}
+        m = xmat[i, ] - lsol[["z"]] #set m
+        if(restart){z = xmat[i,]; m = lsol[["m"]]*0}
         
     }
     xmat = cbind(seq(0, maxtime, ddt), xmat)
     colnames(xmat) = c("Time", rownames(model$get_stoic()))
     return(xmat)
 }
-
-##LNA method 2 -- zt restarted at xt. Inefficient as dmt/dt is integrated.
-# lnasol2 = function(initial, pars, maxtime, m,V,ddt) 
-# {
-#   z = initial
-#   N = maxtime/ddt + 1	
-#   xmat = matrix(0,nrow=N,ncol=length(z))
-#   xmat[1,] = z
-#   for (i in 2:N){
-#     lsol = lnastep(z,m,V,pars,c(1,1+ddt))
-#     z = lsol[[1]]
-#     m = lsol[[2]]
-#     V = lsol[[3]]
-#     
-#     #Reflecting barrier
-#     xmat[i,] = mvrnorm(1, z+m, V)
-#     neg = xmat[i,] < 0
-#     xmat[i,][neg] = xmat[i-1,][neg]
-# 
-#     z = x #restart z at x
-#     m = m*0 #reset m
-#     V = diag(0,length(z)) # reset variance
-#   }
-#   xmat = cbind(seq(0, maxtime, ddt), xmat)
-#   colnames(xmat) = c("Time", rownames(get_stoich()))
-#   return(xmat)
-# }
