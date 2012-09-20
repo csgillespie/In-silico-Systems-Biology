@@ -20,7 +20,7 @@ compare_time = function(curr_l, curr_u, proposed) {
 #' discretise(dd, 0.1)
 discretise = function(dd, tstep) {
   time = tstep
-  dd_dis = matrix(0, ncol=ncol(dd), nrow=ceiling(max(dd[,1]+tstep/2)/tstep))
+  dd_dis = matrix(0, ncol=ncol(dd), nrow=(ceiling(max(dd[,1])/tstep)+1))
   colnames(dd_dis) = colnames(dd)
   dd_dis[1,] = as.numeric(dd[1,])
   
@@ -32,7 +32,7 @@ discretise = function(dd, tstep) {
       j = j + 1
     }
   }
-  return(dd_dis)
+  return(dd_dis[1:(j-1),])
 }
 
 
