@@ -13,7 +13,7 @@ lnafun = function(t, state, model)
     return(list(c(z, m, as.vector(V))))
 }
 
-lnastep = function(model, z, m, ddt)#z,m=c(0,0),V=diag(c(0,0)),pars,gridt=c(0,1)) 
+lnastep = function(model, z, m, ddt)
 {
     u = length(z)
     state = c(z, m, rep(0, u^2))	
@@ -31,7 +31,7 @@ lnastep = function(model, z, m, ddt)#z,m=c(0,0),V=diag(c(0,0)),pars,gridt=c(0,1)
 #' @inheritParams deterministic
 #' @inheritParams diffusion
 #' @param restart a logical value. The default value of FALSE runs the standard
-#' linear noise approximation. A value of TRUE runs the algorith of Fearnhead, Giagos, and
+#' linear noise approximation. A value of TRUE runs the algorithm of Fearnhead, Giagos, and
 #' Sherlock, 2012.
 #' @author Colin Gillespie
 #' @return  A matix. The first column contains the simulation time, the other columns contain the species 

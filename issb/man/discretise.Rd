@@ -2,24 +2,24 @@
 \alias{discretise}
 \title{Discretises simulator output}
 \usage{
-  discretise(dd, tstep)
+  discretise(sim_output, tstep)
 }
 \arguments{
-  \item{dd}{a dataframe/matrix containing simulator output.
-  The first column should be the simulation time}
+  \item{sim_output}{a dataframe/matrix containing simulator
+  output. The first column should be the simulation time}
 
   \item{tstep}{output time step}
 }
 \value{
-  A matrix with the same number of columns as dd,
+  A matrix with the same number of columns as output,
   discretised at time points: 0, tstep, 2tstep, ...
 }
 \description{
   Discretises simulator output
 }
 \examples{
-dd = data.frame(time = c(0, sort(runif(9))),  y=rpois(10, 2))
-discretise(dd, 0.1)
+sim_output = data.frame(time = c(0, sort(runif(9))),  y=rpois(10, 2))
+discretise(sim_output, 0.1)
 }
 \author{
   Colin Gillespie

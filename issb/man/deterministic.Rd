@@ -1,6 +1,6 @@
 \name{deterministic}
 \alias{deterministic}
-\title{Calculates the deterministic solution of a skm}
+\title{Calculates the deterministic solution of a stochastic kinetic model}
 \usage{
   deterministic(model, maxtime, tstep)
 }
@@ -15,10 +15,11 @@
 }
 \value{
   A matix. The first column contains the simulation time,
-  the other columns contain the species levels
+  the other columns contain the species levels. levels
 }
 \description{
-  Calculates the deterministic solution of a skm
+  Calculates the deterministic solution of a stochastic
+  kinetic model
 }
 \examples{
 demo(lv)

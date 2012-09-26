@@ -6,10 +6,11 @@ Version: 0.1
 Date: 2012-07-17
 Author: Colin Gillespie
 Maintainer: Colin Gillespie <colin.gillespie@newcastle.ac.uk>
-Description: R code associated with the book chapter "Simulation of stochastic
-    kinetic models", published in "In silico Systems Biology: A systems-based
-    approach to understanding biological processes"" by Humana Press. This
-    package provides a simple interface to simulating tochastic kinetic models.
+Description: This repository contains the latex source, graphics and R code
+    used in book chapter in "In silico Systems Biology: A systems-based
+    approach to understanding biological processes" published by Humana Press.
+    This book is part of the `Methods in Molecular Biology` series. The authors
+    of this chapter are Andrew Golightly and Colin Gillespie.
 Depends:
     deSolve,
     MASS,

@@ -10,15 +10,16 @@
   number of rows should equal the number of species and the
   number of columns should equal the number of reactions.}
 
-  \item{hazards}{a function for calculating the hazards.}
+  \item{hazards}{a function for calculating the reaction
+  hazards.}
 
   \item{initial}{a vector containing the initial conditions
   of the model.}
 
-  \item{pars}{a vector containing the parameter vector}
+  \item{pars}{a vector containing the parameter values.}
 
   \item{jacobian}{only needed when simulating from the
-  linear noise approximation}
+  linear noise approximation.}
 }
 \value{
   A list with class skm

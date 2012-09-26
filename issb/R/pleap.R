@@ -2,7 +2,7 @@
 #' @inheritParams deterministic
 #' @param ddt the timestep.
 #' @author Colin Gillespie
-#' @return  A matix. The first column contains the simulation time, the other columns contain the species 
+#' @return  A matrix. The first column contains the simulation time, the other columns contain the species 
 #' levels
 #' @keywords character
 #' @export

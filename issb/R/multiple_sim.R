@@ -17,14 +17,14 @@ simulate = function(model, maxtime,
   return(simulations)
 }
 
-#' @title Multiple stochastic simulates
+#' @title Multiple stochastic simulation
 #' @inheritParams deterministic
 #' @param no_sims the number of stochastic simulations to perform
 #' @param no_cores the number of CPU cores to utilise.
-#' @param simulator the stochastic simulator that will be run
+#' @param simulator the stochastic simulator that will be used.
 #' @param ... additional parameters that will be passed to the simulator
 #' @author Colin Gillespie
-#' @return  A matix. The first column contains the simulation time, the other columns contain the species 
+#' @return  A matix. The first column contains the simulation time, the other columns contain the species.
 #' levels
 #' @keywords character
 #' @export

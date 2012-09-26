@@ -8,8 +8,6 @@
 #' @examples demo(lv)
 #' gillespie(model, 10)
 
-
-
 gillespie = function(model, maxtime)
 {
     sim_time = 0; i = 1; x = model$get_initial()
