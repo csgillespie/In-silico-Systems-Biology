@@ -571,15 +571,15 @@ reader for further details.
 \caption{LNA method 1}\label{A4}
 \begin{enumerate}
 \item Set $t=0$. Initialise the rate constants and the initial molecule numbers
-  $x$. Set $z_{0}=x$, $m_{0}=x-z_{0}$ (i.e. a vector of zeros) and $V_{0}$ as
+  $x$. Set $z_{0}=x/\Omega$, $m_{0}=(x-\Omega z_{0})/\sqrt{\Omega}$ (i.e. a vector of zeros) and $V_{0}$ as
   the $u\times u$ matrix, with all entries equal to zero.
 \item Numerically integrate the system of ODEs satisfied by $z_t$, $m_t$ and
-  $V_t$ over $[t,t+\Delta t]$.
+  $V_t$ over $(t,t+\Delta t]$.
 \item Update the state by drawing $x$ from a $\textrm{N}\left(\Omega z_{t+\Delta
       t}+\sqrt{\Omega}m_{t+\Delta t}\,,\, \Omega V_{t+\Delta t}\right)$
   distribution.
-\item Update $t:=t+\Delta t$. Set $m_{t}=x-z_{t}$ and $V_{t}$ as the $u\times u$
-  matrix, with all entries equal to zero.
+\item Update $t:=t+\Delta t$. Set $m_{t}=(x-\Omega z_{t})/\sqrt{\Omega}$ and $V_{t}$ as the $u\times u$
+  matrix, with all entries equal to zero. 
 \item Output $t$ and $x$. If $t<T_{max}$ return to step 2.
 \end{enumerate}
 \end{algorithm}
@@ -626,13 +626,13 @@ approximation of the CLE and therefore of the Markov jump process model.
 \caption{LNA method 2}\label{A5}
 \begin{enumerate}
 \item Set $t=0$. Initialise the rate constants and the initial molecule numbers
-  $x$. Set $z_{0}=x$, and $V_{0}$ as the $u\times u$ matrix, with all entries
+  $x$. Set $z_{0}=x/\Omega$, and $V_{0}$ as the $u\times u$ matrix, with all entries
   equal to zero.
 \item Numerically integrate the system of ODEs satisfied by $z_t$ and $V_t$ over
-  $[t,t+\Delta t]$.
+  $(t,t+\Delta t]$.
 \item Update the state by drawing $x$ from a $\textrm{N}\left(\Omega z_{t+\Delta
       t}\,,\, \Omega V_{t+\Delta t}\right)$ distribution.
-\item Update $t:=t+\Delta t$. Set $z_{t}=x$ and $V_{t}$ as the $u\times u$
+\item Update $t:=t+\Delta t$. Set $z_{t}=x/\Omega$ and $V_{t}$ as the $u\times u$
   matrix, with all entries equal to zero.
 \item Output $t$ and $x$. If $t<T_{max}$ return to step 2.
 \end{enumerate}
@@ -687,8 +687,8 @@ the LNA solution can be found in \cite{kampen2001,elf03,
 \begin{enumerate}
 \item Set $t=0$. Initialise the rate constants and the initial molecule numbers $x$. 
 \item Classify reactions as fast or slow based on $x$.
-\item Update fast reaction dynamics over $[t,t+\Delta t]$.
-\item Based on the fast reaction events over $[t,t+\Delta t]$, determine if a
+\item Update fast reaction dynamics over $(t,t+\Delta t]$.
+\item Based on the fast reaction events over $(t,t+\Delta t]$, determine if a
   slow reaction has occurred.
 \item If no slow reactions have occurred, update $x$ based on the fast reactions
   only. Set $t:=t+\Delta t$ and goto step 7.
@@ -860,8 +860,7 @@ https://github.com/csgillespie/In-silico-Systems-Biology
 It was worth noting that using R is useful when developing algorithms that have
 relatively simple behaviour, for larger models, this method does not scale well.
 Instead, simulators written in compiled languages, such as C/C++ or Java are
-preferred; particularly if they can input/export SBML. \textbf{Reference to the
-  SBML chapter in this book.}
+preferred; particularly if they can input/export SBML.
 
 \bibliographystyle{unsrt}
 \bibliography{references}
