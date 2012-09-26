@@ -78,6 +78,11 @@ cairo_ps("../graphics/figure2.eps", width=6,height=4.5)
 print(g)
 dev.off()
 
+# N = 1000
+# dd1a = dd1[dd1$no_sim < N,]
+# ggplot(data=dd1a,aes(Time, V2))  + 
+#     geom_line(aes(group=no_sim), alpha=I(1/sqrt(N))) + 
+#     theme_bw() + ylim(c(0, 750))
 
 
 
