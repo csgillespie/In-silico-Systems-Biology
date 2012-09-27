@@ -17,7 +17,7 @@ The R code used for the simulations in this chapter is found in the *issb* direc
 To install the associated R code, first we need to install the package
 
 ```{r}
-install.packages("issb", contriburl = "http://www.mas.ncl.ac.uk/~ncsg3/R")
+install.packages("issb", repos = "http://www.mas.ncl.ac.uk/~ncsg3/R")
 ```
 
 This should download and install *issb*. To simulate the Lotka-Volterra model using the Gillespie SSA, use the following commands:
