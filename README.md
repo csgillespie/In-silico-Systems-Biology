@@ -19,7 +19,7 @@ The R code used for the simulations in this chapter is found in the *issb* direc
 To install the associated R code, use the *install.packages* command:
 
 ```{r}
-install.packages("issb", contriburl = "http://www.mas.ncl.ac.uk/~ncsg3/R")
+install.packages("issb", repos="http://R-Forge.R-project.org")
 ```
 
 This should download and install *issb*. The package can be loaded using the library command:
