@@ -10,7 +10,7 @@ mrefun = function(t, z, model)
 #' @param maxtime the maximum simulation time
 #' @param tstep the output grid size. Note this doesn't (really) affect the underlying ODE solver
 #' @author Colin Gillespie
-#' @return A matix. The first column contains the simulation time, the other columns contain the species levels.
+#' @return A matrix. The first column contains the simulation time, the other columns contain the species levels.
 #' levels
 #' @seealso create_model
 #' @keywords character
