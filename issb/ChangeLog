@@ -1,0 +1,6 @@
+== Version 0.11 ==
+    * Bug fix: Reflecting barriers for the diffusion approximation
+    * Bug fix: multiple_sims function didn't return all species
+
+== Version 0.1 ==
+    Initial release
