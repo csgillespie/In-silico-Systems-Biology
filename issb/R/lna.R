@@ -58,6 +58,8 @@ lna = function(model, maxtime, ddt, restart=FALSE)
                 
         #Reflecting barrier
         xmat[i,] = MASS:::mvrnorm(1, z + lsol[["m"]], lsol[["V"]])
+        
+        
         neg = xmat[i,] < 0
         xmat[i,][neg] = xmat[i-1,][neg]
         

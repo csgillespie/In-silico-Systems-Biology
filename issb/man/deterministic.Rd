@@ -14,7 +14,7 @@
   (really) affect the underlying ODE solver}
 }
 \value{
-  A matix. The first column contains the simulation time,
+  A matrix. The first column contains the simulation time,
   the other columns contain the species levels. levels
 }
 \description{

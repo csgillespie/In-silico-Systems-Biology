@@ -3,9 +3,9 @@ simulate = function(model, maxtime,
 
   ##Quick check for number of columns
   sim = discretise(simulator(model, maxtime, ...), tstep)
-  nc = ncol(sim)-1
+  nc = ncol(sim)
   nr = nrow(sim)
-  simulations = matrix(0, ncol=nc, nrow=nr*no_sims)
+  simulations = matrix(0, ncol=(nc-1), nrow=nr*no_sims)
   simulations[1:nr,] = sim[,2:nc]
   if(no_sims == 1) return(simulations)
   
@@ -24,7 +24,7 @@ simulate = function(model, maxtime,
 #' @param simulator the stochastic simulator that will be used.
 #' @param ... additional parameters that will be passed to the simulator
 #' @author Colin Gillespie
-#' @return  A matix. The first column contains the simulation time, the other columns contain the species.
+#' @return  A matrix. The first column contains the simulation time, the other columns contain the species.
 #' levels
 #' @keywords character
 #' @export
