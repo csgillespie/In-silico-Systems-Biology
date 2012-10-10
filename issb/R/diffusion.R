@@ -1,5 +1,4 @@
-
-#' @title Runs the Euler-Maruyama
+#' @title Runs the Euler-Maruyama approximation
 #' @inheritParams deterministic
 #' @param ddt the step size used in the Euler-Maruyama solver
 #' @author Colin Gillespie
