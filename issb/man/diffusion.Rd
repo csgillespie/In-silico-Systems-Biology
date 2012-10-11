@@ -1,6 +1,6 @@
 \name{diffusion}
 \alias{diffusion}
-\title{Runs the Euler-Maruyama}
+\title{Runs the Euler-Maruyama approximation}
 \usage{
   diffusion(model, maxtime, ddt)
 }
@@ -18,7 +18,7 @@
   the other columns contain the species levels
 }
 \description{
-  Runs the Euler-Maruyama
+  Runs the Euler-Maruyama approximation
 }
 \examples{
 demo(lv)
