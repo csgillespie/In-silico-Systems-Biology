@@ -16,10 +16,12 @@ R code
 
 The R code used for the simulations in this chapter is found in the *issb* directory. The code is not meant for *industrial style* stochastic simulation. Rather, it is used to illustrate algorithms described in the chapter. The code has been placed into a simple R package, *issb*.
 
-To install the associated R code, use the *install.packages* command:
+To install the associated R code from this repository, use the *devtools* package:
 
 ```{r}
-install.packages("issb", repos="http://R-Forge.R-project.org")
+##install.packages("devtools")
+library(devtools)
+install_github("In-silico-Systems-Biology", "csgillespie", subdir="issb")
 ```
 
 This should download and install *issb*. The package can be loaded using the library command:
