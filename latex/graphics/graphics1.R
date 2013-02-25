@@ -5,7 +5,7 @@ require(reshape2)
 require(ggplot2)
 theme_set(theme_bw(base_size = 11))
 vplayout = function(x, y) 
-  viewport(layout.pos.row = x, layout.pos.col = y)
+    viewport(layout.pos.row = x, layout.pos.col = y)
 
 ##Simulation parameters
 demo(lv, ask=FALSE)
@@ -15,10 +15,9 @@ maxtime = 50
 set.seed(1)
 sim = gillespie(model, maxtime)
 dd1 = as.data.frame(sim)
-dd1$type = "Stochastic"
-
 dd2 = melt(dd1, id = c("Time"))
 colnames(dd2)[3] = "Population"
+dd1$type = "Stochastic"
 dd2$type = "Stochastic"
 
 ##Deterministic
@@ -28,18 +27,22 @@ colnames(dd4)[3] = "Population"
 dd3$type = "Deterministic"
 dd4$type = "Deterministic"
 
+
+
 #Construct plots: Left panel
 df1 = rbind(dd2, dd4)
 g1 = ggplot(df1, aes(Time, Population)) +
-  geom_step() +
-  facet_grid(type~variable) + ylim(c(0, 500))
-
+    geom_step() +
+    facet_grid(type~variable) + 
+    ylim(c(0, 500))
+g1
+head(df1)
 #Right panel
 df2 = rbind(dd1, dd3)
 g2 = ggplot(df2) +
-  geom_path(aes(x=Prey, y=Predator)) +
-  xlim(c(0, 400)) + ylim(c(0, 500)) +
-  facet_grid(type ~ .)
+    geom_path(aes(x=Prey, y=Predator)) +
+    xlim(c(0, 400)) + ylim(c(0, 500)) +
+    facet_grid(type ~ .)
 
 pdf("../graphics/figure1.pdf", width=8,height=4.5)
 grid.newpage()
