@@ -30,12 +30,12 @@ gillespie = function(model, maxtime)
     }
     
     if(sim_time < maxtime) {
-        xmat[i+1,] = xmat[i,]
-        xmat[i+1,1] = maxtime
+        xmat[i+1, ] = xmat[i, ]
+        xmat[i+1, 1] = maxtime
     } else {
-        xmat[i,1] = maxtime
+        xmat[i, 1] = maxtime
     }
     colnames(xmat) = c("Time", rownames(s))
-    return(xmat[1:i,])
+    return(xmat[1:i, ])
 }	
 
