@@ -22,6 +22,7 @@ pleap = function(model, maxtime, ddt)
     for (i in 2:N){
         h = model$get_haz(x)
         x = x + s %*% rpois(v, h*ddt)
+        x[x < 0 ]  = 0
         xmat[i, ] = x
     }
     
