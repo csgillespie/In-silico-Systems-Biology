@@ -1,3 +1,4 @@
+require(issb)
 require(ggplot2)
 theme_set(theme_bw(base_size = 11))
 
@@ -73,10 +74,10 @@ dev.off()
 #####################################################
 ##Need to use cairo for transparent postscript files#
 #####################################################
-library(grDevices)
-cairo_ps("../graphics/figure2.eps", width=6,height=4.5)
-print(g)
-dev.off()
+# library(grDevices)
+# cairo_ps("../graphics/figure2.eps", width=6,height=4.5)
+# print(g)
+# dev.off()
 
 # N = 1000
 # dd1a = dd1[dd1$no_sim < N,]
@@ -94,27 +95,29 @@ dev.off()
 #This can take a while!
 #The function sim_summary_stats runs in parallel.
 #Use the no_cores option to specify the no_cores you want to use
-library(issb)
+require(issb)
 demo(lv, ask=FALSE)
 
 ##tstep controls the output of the simulator, not the ODE timestep.
 maxtime = 50
 tstep = 0.05
-no_sims = 10000
+##Change to something appropriate
+no_sims = 1000
 
 ##Gillespie
 set.seed(1)
 dd1 = as.data.frame(
-    multiple_sims(model, maxtime, tstep, no_sims, no_cores=3, gillespie))
+    multiple_sims(model, maxtime, tstep, no_sims, no_cores=2, gillespie))
 dd1$type = "Gillespie"
 save(dd1, file="data_dd1.RData")
 rm(dd1)
 
 ##Diffusion
 dd2 = as.data.frame(
-    multiple_sims(model, maxtime, tstep, no_sims, no_cores=3, diffusion, 0.01))
+    multiple_sims(model, maxtime, tstep, no_sims, no_cores=3, diffusion, ddt=0.01))
 dd2$type = "CLE"
-save(dd2, file="data_dd2.RData")
+save( dd2, file="data_dd2.RData")
+rm(dd2)
 
 
 ##LNA 1
@@ -129,3 +132,4 @@ dd4 = as.data.frame(
     multiple_sims(model, maxtime,  tstep, no_sims, no_cores=3, lna, ddt=0.05, restart=TRUE))
 dd4$type = "LNA 2"
 save(dd4, file="data_dd4.RData")
+rm(dd4)
