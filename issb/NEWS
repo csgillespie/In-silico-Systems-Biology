@@ -1,3 +1,7 @@
+== Version 0.12 ==
+    * Bug fix: Added absorbing barrier in the pleap method.
+    * Tidied up parallel code
+
 == Version 0.11 ==
     * Bug fix: Reflecting barriers for the diffusion approximation
     * Bug fix: multiple_sims function didn't return all species
