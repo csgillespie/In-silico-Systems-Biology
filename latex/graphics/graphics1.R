@@ -36,7 +36,7 @@ g1 = ggplot(df1, aes(Time, Population)) +
     facet_grid(type~variable) + 
     ylim(c(0, 500))
 g1
-head(df1)
+
 #Right panel
 df2 = rbind(dd1, dd3)
 g2 = ggplot(df2) +
