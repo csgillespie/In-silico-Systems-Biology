@@ -28,13 +28,12 @@ gillespie = function(model, maxtime)
         xmat[i, ] = c(sim_time, x)
         h = get_haz(x)
     }
-    
     if(sim_time < maxtime) {
-        xmat[i+1, ] = xmat[i, ]
-        xmat[i+1, 1] = maxtime
-    } else {
-        xmat[i, 1] = maxtime
+        i = i + 1
+        xmat[i, ] = xmat[i-1, ]
     }
+    xmat[i, 1] = maxtime
+
     colnames(xmat) = c("Time", rownames(s))
     return(xmat[1:i, ])
 }	
