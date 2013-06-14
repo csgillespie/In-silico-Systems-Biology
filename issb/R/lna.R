@@ -58,15 +58,12 @@ lna = function(model, maxtime, ddt, restart=FALSE)
                 
         #Reflecting barrier
         xmat[i,] = MASS:::mvrnorm(1, z + lsol[["m"]], lsol[["V"]])
-        
-        
         neg = xmat[i,] < 0
         xmat[i,][neg] = xmat[i-1,][neg]
         
         ##Reinitialise
         m = xmat[i, ] - lsol[["z"]] #set m
         if(restart){z = xmat[i,]; m = lsol[["m"]]*0}
-        
     }
     xmat = cbind(seq(0, maxtime, ddt), xmat)
     colnames(xmat) = c("Time", rownames(model$get_stoic()))
