@@ -23,9 +23,9 @@ multiple_sims = function(model, maxtime,
     
     cl = makeCluster(no_cores)
     clusterEvalQ(cl, require(issb))
-    l = parLapply(cl, 1:no_sims, simulate, model, maxtime, tstep, simulator)
+    l = parLapply(cl, 1:no_sims, simulate, model, maxtime, tstep, simulator, ...)
     stopCluster(cl)
-    return(l)
+    
     l = Reduce("rbind", l)
     times = unique(l[,1])
     m_sim = cbind(rep(1:no_sims, each=length(times)), l)
