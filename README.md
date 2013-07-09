@@ -1,9 +1,11 @@
 In-silico-Systems-Biology
 =========================
 
-This repository contains the latex source, graphics and R code used in book chapter in "In silico Systems Biology:  A systems-based approach to understanding biological processes" published by Humana Press. This book is part of the `Methods in Molecular Biology` series. The authors of this chapter are [Andrew Golightly](http://www.mas.ncl.ac.uk/~nag48/) and [Colin Gillespie](http://www.mas.ncl.ac.uk/~ncsg3/). 
+This repository contains the latex source, graphics and R code used in:
 
-You can download a [pdf](https://github.com/csgillespie/In-silico-Systems-Biology/blob/master/latex/sskm.pdf) of the book chapter, or the latex source code.
+[Golightly, A](http://www.mas.ncl.ac.uk/~nag48/), [Gillespie, CS](http://www.mas.ncl.ac.uk/~ncsg3/). *Simulation of stochastic kinetic models*. In: In-silico Systems Biology: A systems-based approach to understanding biological processes, 2013. Humana Press ([pdf](https://github.com/csgillespie/In-silico-Systems-Biology/blob/master/latex/sskm.pdf)).
+
+This book is part of the `Methods in Molecular Biology` series. You can download a [pdf](https://github.com/csgillespie/In-silico-Systems-Biology/blob/master/latex/sskm.pdf) of the book chapter, or the latex source code.
 
 Latex code
 ----------
