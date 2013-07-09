@@ -5,7 +5,7 @@ This repository contains the latex source, graphics and R code used in:
 
 [Golightly, A](http://www.mas.ncl.ac.uk/~nag48/), [Gillespie, CS](http://www.mas.ncl.ac.uk/~ncsg3/). *Simulation of stochastic kinetic models*. In: In-silico Systems Biology: A systems-based approach to understanding biological processes, 2013. Humana Press ([pdf](https://github.com/csgillespie/In-silico-Systems-Biology/blob/master/latex/sskm.pdf)).
 
-This book is part of the `Methods in Molecular Biology` series. You can download a [pdf](https://github.com/csgillespie/In-silico-Systems-Biology/blob/master/latex/sskm.pdf) of the book chapter, or the latex source code.
+This book is part of the [`Methods in Molecular Biology`](http://www.springer.com/life+sciences/systems+biology+and+bioinformatics/book/978-1-62703-449-4) series. You can download a [pdf](https://github.com/csgillespie/In-silico-Systems-Biology/blob/master/latex/sskm.pdf) of the book chapter, or the latex source code.
 
 Latex code
 ----------
