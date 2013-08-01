@@ -2,7 +2,6 @@ require(issb)
 require(ggplot2)
 theme_set(theme_bw(base_size = 11))
 
-
 #We want the following percentiles
 stats = c(0.025, 0.25, 0.5, 0.75, 0.975)
 
