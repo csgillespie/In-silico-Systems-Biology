@@ -1,6 +1,7 @@
 export(create_model)
 export(deterministic)
 export(diffusion)
+export(diffusion_tau_leap)
 export(discretise)
 export(gillespie)
 export(lna)

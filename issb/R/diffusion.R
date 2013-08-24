@@ -34,6 +34,8 @@ diffusion = function(model, maxtime, ddt)
   times = seq(0, maxtime, by=ddt)
   xmat = cbind(times, xmat)
   colnames(xmat) = c("Time", rownames(s))
+  
+  xmat[nrow(xmat), 1] = maxtime
   return(xmat)
 }
 
