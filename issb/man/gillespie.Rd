@@ -5,13 +5,12 @@
   gillespie(model, maxtime, tstep = NULL)
 }
 \arguments{
+  \item{tstep}{output time step}
+
   \item{model}{a skm object, created using the create_model
   function}
 
   \item{maxtime}{the maximum simulation time}
-
-  \item{tstep}{the output grid size. Note this doesn't
-  (really) affect the underlying ODE solver}
 }
 \value{
   A matrix. The first column contains the simulation time,

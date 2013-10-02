@@ -1,5 +1,6 @@
 #' @title Stochastic simulation using the standard Gillespie algorithm
 #' @inheritParams deterministic
+#' @param tstep output time step
 #' @author Colin Gillespie
 #' @return  A matrix. The first column contains the simulation time, the other columns contain the species 
 #' levels
