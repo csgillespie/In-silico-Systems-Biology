@@ -2,10 +2,10 @@ Package: issb
 Type: Package
 Title: R code associated with the book chapter "Simulation of stochastic
     kinetic models"
-Version: 0.12
+Version: 0.13
 Date: 2013-06-14
 Author: Colin Gillespie
-Maintainer: Colin Gillespie <colin.gillespie@newcastle.ac.uk>
+Maintainer: Colin Gillespie <csgillespie@gmail.com>
 Description: This repository contains the latex source, graphics and R code
     used in book chapter in "In silico Systems Biology: A systems-based
     approach to understanding biological processes" published by Humana Press.
