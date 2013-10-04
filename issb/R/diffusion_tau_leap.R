@@ -26,19 +26,22 @@ diffusion_tau_leap = function(model, maxtime,
     x = model$get_initial()
     xmat = matrix(0, nrow=100000, ncol=length(x)+1)
     xmat[i, ] = c(time, x)
-
+    
     
     while(time < maxtime) {
+        ## Update counter 
+        i = i + 1
+        
         ## Calculate time step
         xi = get_haz(x) %*% t(abs(s))
         denom = xi %*% t(model$get_jacobian(x))
-        ddt = min(0.1*sum(get_haz(x))/denom)
-
+        ddt = min(epsilon*sum(get_haz(x))/denom)
         ddt = min(maxtime-time, ddt)
-        
-        i = i + 1
+
         z = rnorm(length(pars), 0, sqrt(ddt))
-        h = get_haz(x)
+        x_dashed = as.vector(x + ddt*s %*% get_haz(x)/2)
+        
+        h = get_haz(x_dashed)
         x = x +
             s %*% h*ddt +
             s %*% diag(sqrt(h)) %*% z
