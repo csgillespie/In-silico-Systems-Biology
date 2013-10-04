@@ -28,6 +28,7 @@ gillespie = function(model, maxtime, tstep=NULL)
     j = sample(length(p), 1, prob=h)
     x = x + s[ ,j]
     
+    ##This is a hack :(
     if(is.null(tstep)) {
       i = i + 1
       xmat[i, ] = c(sim_time, x)
