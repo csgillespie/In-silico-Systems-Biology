@@ -26,7 +26,7 @@ pleap = function(model, maxtime, ddt)
         xmat[i, ] = x
     }
     
-    times = seq(0, maxtime, by=ddt)
+    times = seq(0, maxtime, length.out=nrow(xmat))
     xmat = cbind(times, xmat)
     colnames(xmat) = c("Time", rownames(s))
     return(xmat)

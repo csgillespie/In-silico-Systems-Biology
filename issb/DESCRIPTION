@@ -26,3 +26,4 @@ Collate:
     'discretise.R'
     'multiple_sim.R'
     'diffusion_tau_leap.R'
+    'tau_leap.R'
