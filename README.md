@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/csgillespie/In-silico-Systems-Biology.png?branch=master,dev)](https://travis-ci.org/csgillespie/In-silico-Systems-Biology)
+
 In-silico-Systems-Biology
 =========================
 
