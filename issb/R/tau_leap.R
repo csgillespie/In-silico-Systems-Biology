@@ -5,6 +5,7 @@
 #' Typically, you don't want to do this.
 #' @inheritParams deterministic
 #' @param epsilon Default 0.03
+#' @param mid_point  Logical (default TRUE). Should we use the mid_point method when updating species.
 #' @return  A matrix. The first column contains the simulation time, the other columns contain the species 
 #' levels
 #' @keywords character

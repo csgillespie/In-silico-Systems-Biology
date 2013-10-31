@@ -17,7 +17,7 @@ lnastep = function(model, z, m, ddt)
 {
     u = length(z)
     state = c(z, m, rep(0, u^2))	
-    sol = deSolve:::ode(y=state, func=lnafun, times=c(0, ddt), parms=model)
+    sol = deSolve::ode(y=state, func=lnafun, times=c(0, ddt), parms=model)
     
     #Remove first column and get just give the final row
     sol = sol[nrow(sol), -1]
@@ -57,7 +57,7 @@ lna = function(model, maxtime, ddt, restart=FALSE)
         z = lsol[["z"]]
                 
         #Reflecting barrier
-        xmat[i,] = MASS:::mvrnorm(1, z + lsol[["m"]], lsol[["V"]])
+        xmat[i,] = MASS::mvrnorm(1, z + lsol[["m"]], lsol[["V"]])
         neg = xmat[i,] < 0
         xmat[i,][neg] = xmat[i-1,][neg]
         
