@@ -1,7 +1,6 @@
-[![Build Status](https://travis-ci.org/csgillespie/In-silico-Systems-Biology.png?branch=master,dev)](https://travis-ci.org/csgillespie/In-silico-Systems-Biology)
-
 In-silico-Systems-Biology
 =========================
+[![Build Status](https://travis-ci.org/csgillespie/In-silico-Systems-Biology.png?branch=master,dev)](https://travis-ci.org/csgillespie/In-silico-Systems-Biology)
 
 This repository contains the latex source, graphics and R code used in:
 
@@ -116,7 +115,7 @@ The figure below shows a single stochastic realisation of the Lotka-Volterra sys
 
 #### Parallel simulations
 
-The *issb* package also contains the a function that allows multiple stochastic simulations to be run in parallel. The following piece of code, runs the gillespie simulator using two CPU cores. The *tstep* specifies the output time step used.
+The *issb* package also allows multiple stochastic simulations to be run in parallel. The following piece of code, runs the gillespie simulator using two CPU cores. The *tstep* specifies the output time step used.
 
 ```{r}
 multiple_sims(model, maxtime=5, tstep=1, 
