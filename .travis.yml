@@ -7,7 +7,7 @@ language: c
 # language: objective-c
 script: 
 #    - ./travis-tool.sh run_tests
-    - cd ..; cd paper; make
+    - cd ..; cd latex; make
 before_install:
     - cd issb
     - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
