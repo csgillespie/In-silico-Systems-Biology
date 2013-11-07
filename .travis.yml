@@ -5,7 +5,9 @@
 language: c
 # To build on OSX, switch the previous line to
 # language: objective-c
-script: ./travis-tool.sh run_tests
+script: 
+#    - ./travis-tool.sh run_tests
+    - cd ..; cd paper; make
 before_install:
     - cd issb
     - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
