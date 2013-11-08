@@ -16,3 +16,7 @@ notifications:
     email:
     on_success: change
     on_failure: change
+    
+env:
+  global:
+    - BOOTSTRAP_LATEX="1"    
