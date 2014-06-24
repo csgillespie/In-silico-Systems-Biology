@@ -1,3 +1,7 @@
+== Version 0.13.2 ==
+ * Update roxygen docs
+ * Bug fix in multipe sims function
+
 == Version 0.13.1 ==
  * Add tau_leap methods
  * travis build

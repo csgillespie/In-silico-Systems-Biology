@@ -40,22 +40,20 @@ lnastep = function(model, z, m, ddt)
 #' @export
 #' @examples demo(lv)
 #' lna(model, 10, 0.1)
-
 lna = function(model, maxtime, ddt, restart=FALSE) 
 {
-
     z = model$get_initial()
-    N = maxtime/ddt + 1	
+    N = max(maxtime/ddt, 2)
     xmat = matrix(0, nrow=N, ncol=length(z))
     xmat[1,] = z
-    
     ##Initialise m and V
     m = z*0
     V = matrix(0, length(z), length(z))
+
     for (i in 2:N){
         lsol = lnastep(model, z, m, ddt)
         z = lsol[["z"]]
-                
+        
         #Reflecting barrier
         xmat[i,] = MASS::mvrnorm(1, z + lsol[["m"]], lsol[["V"]])
         neg = xmat[i,] < 0

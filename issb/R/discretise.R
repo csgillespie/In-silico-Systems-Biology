@@ -30,14 +30,11 @@ discretise = function(sim_output, tstep) {
   j = 2
   for(i in 1:(nr-1)) {
     while(compare_time(sim_output[i, 1], sim_output[i+1, 1], time)) {
-      dd_dis[j,] = c(time, sim_output[i, 2:nc])
+      dd_dis[j,] = c(time, sim_output[i+1, 2:nc])
       time = time + tstep
       j = j + 1
     }
   }
   return(dd_dis[1:(j-1), ])
 }
-
-
-
 

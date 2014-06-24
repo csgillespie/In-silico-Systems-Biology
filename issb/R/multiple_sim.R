@@ -1,6 +1,7 @@
 simulate = function(i, model, maxtime,
                     tstep, simulator,  ...) {
     set.seed(i)    
+    simulator(model, maxtime, ...)
     discretise(simulator(model, maxtime, ...), tstep)
 }
 
@@ -21,10 +22,16 @@ simulate = function(i, model, maxtime,
 multiple_sims = function(model, maxtime,
                          tstep, no_sims, no_cores, simulator, ...) {
     
+    ## Force the hazard to be evaluated
+    ## Otherwise strange errors in the parallel part
+    ## Parhaps lazy loading?
+    model$get_haz(model$get_initial())    
+    
     cl = makeCluster(no_cores)
     clusterEvalQ(cl, require(issb))
     l = parLapply(cl, 1:no_sims, simulate, model, maxtime, tstep, simulator, ...)
     stopCluster(cl)
+    return(l)
     
     l = Reduce("rbind", l)
     times = unique(l[,1])
