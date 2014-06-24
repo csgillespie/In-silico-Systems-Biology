@@ -13,11 +13,12 @@ lnafun = function(t, state, model)
     return(list(c(z, m, as.vector(V))))
 }
 
+#' @importFrom deSolve ode
 lnastep = function(model, z, m, ddt)
 {
     u = length(z)
     state = c(z, m, rep(0, u^2))	
-    sol = deSolve::ode(y=state, func=lnafun, times=c(0, ddt), parms=model)
+    sol = ode(y=state, func=lnafun, times=c(0, ddt), parms=model)
     
     #Remove first column and get just give the final row
     sol = sol[nrow(sol), -1]
@@ -37,33 +38,47 @@ lnastep = function(model, z, m, ddt)
 #' @return  A matrix. The first column contains the simulation time, the other columns contain the species 
 #' levels
 #' @keywords character
+#' @importFrom MASS mvrnorm
 #' @export
 #' @examples demo(lv)
 #' lna(model, 10, 0.1)
 lna = function(model, maxtime, ddt, restart=FALSE) 
 {
     z = model$get_initial()
-    N = max(maxtime/ddt, 2)
-    xmat = matrix(0, nrow=N, ncol=length(z))
-    xmat[1,] = z
+    N = max((maxtime+.Machine$double.eps^0.5)/ddt + 1, 2)
+    xmat = matrix(0, nrow=N, ncol=length(z)+1)
+    xmat[1,] = c(0, z)
     ##Initialise m and V
     m = z*0
     V = matrix(0, length(z), length(z))
-
+    
     for (i in 2:N){
         lsol = lnastep(model, z, m, ddt)
         z = lsol[["z"]]
         
-        #Reflecting barrier
-        xmat[i,] = MASS::mvrnorm(1, z + lsol[["m"]], lsol[["V"]])
-        neg = xmat[i,] < 0
-        xmat[i,][neg] = xmat[i-1,][neg]
+        new_x = mvrnorm(1, z + lsol[["m"]], lsol[["V"]])
+        while(any(new_x < 0)) {
+            new_x = mvrnorm(1, z + lsol[["m"]], lsol[["V"]])
+        }
+        xmat[i, ] = c(xmat[i-1, 1] + ddt, new_x)
         
         ##Reinitialise
-        m = xmat[i, ] - lsol[["z"]] #set m
-        if(restart){z = xmat[i,]; m = lsol[["m"]]*0}
+        m = xmat[i, -1] - lsol[["z"]] #set m
+        if(restart){z = xmat[i,-1]; m = lsol[["m"]]*0}
     }
-    xmat = cbind(seq(0, maxtime, ddt), xmat)
     colnames(xmat) = c("Time", rownames(model$get_stoic()))
     return(xmat)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
