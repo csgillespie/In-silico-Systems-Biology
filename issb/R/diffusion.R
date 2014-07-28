@@ -11,7 +11,6 @@
 
 diffusion = function(model, maxtime, ddt)
 {
-  N = 100000
   s = model$get_stoic()		
   N = maxtime/ddt + 1
   xmat = matrix(0, nrow=N, ncol=length(model$get_initial()))

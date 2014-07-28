@@ -22,7 +22,7 @@ tau_leap = function(model, maxtime, epsilon=0.03, mid_point=TRUE) {
     ## Initialise
     time = 0; i = 1   
     x = model$get_initial()
-    xmat = matrix(0, nrow=100000, ncol=length(x)+1)
+    xmat = matrix(0, nrow=1e6, ncol=length(x)+1)
     xmat[i, ] = c(time, x)
     
     
