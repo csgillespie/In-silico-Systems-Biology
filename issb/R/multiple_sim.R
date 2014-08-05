@@ -1,8 +1,15 @@
 simulate = function(i, model, maxtime,
                     tstep, simulator, set_seed, ...) {
     if(set_seed) set.seed(i)    
-    simulator(model, maxtime, ...)
-    discretise(simulator(model, maxtime, ...), tstep)
+    
+    ## Since the gillespie outputs at every reaction, need to pass 
+    ## tstep
+    if(identical(simulator, gillespie)) {
+        discretise(simulator(model, maxtime, tstep), tstep)
+    }else { 
+        discretise(simulator(model, maxtime, ...), tstep)
+    }
+    
 }
 
 #' @title Multiple stochastic simulation
@@ -33,7 +40,7 @@ multiple_sims = function(model, maxtime,
     clusterEvalQ(cl, require(issb))
     l = parLapply(cl, 1:no_sims, simulate, model, maxtime, tstep, simulator, set_seed=set_seed, ...)
     stopCluster(cl)
-
+    
     l = Reduce("rbind", l)
     times = unique(l[,1])
     m_sim = cbind(rep(1:no_sims, each=length(times)), l)

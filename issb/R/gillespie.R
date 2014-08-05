@@ -11,7 +11,7 @@
 
 gillespie = function(model, maxtime, tstep=NULL)
 {
-    tincr = 0
+    tincr = tstep
     sim_time = 0; i = 1; x = model$get_initial()
     N = 100000
     xmat = matrix(0, nrow=N, ncol=(length(x) + 1))
@@ -23,7 +23,7 @@ gillespie = function(model, maxtime, tstep=NULL)
     h = get_haz(x)
     p = model$get_pars()
     
-    while(sim_time < maxtime && sum(h) > 0){
+    while(sim_time <= maxtime && sum(h) > 0){
         sim_time = sim_time + rexp(1, sum(h))
         j = sample(length(p), 1, prob=h)
         x = x + s[ ,j]
@@ -33,20 +33,18 @@ gillespie = function(model, maxtime, tstep=NULL)
             i = i + 1
             xmat[i, ] = c(sim_time, x)
         } else {
-            while(tincr < sim_time) {
+            while(tincr <= sim_time && tincr < (maxtime + tstep/2)) {
                 i = i + 1
                 xmat[i, ] = c(tincr, x)
                 tincr = tincr + tstep
             }
-            
         }
-        
         h = get_haz(x)
     }
-    if(sim_time < maxtime) {
-        i = i + 1
-        xmat[i, ] = xmat[i-1, ]
-    }
+    #     if(sim_time < maxtime) {
+    #         i = i + 1
+    #         xmat[i, ] = xmat[i-1, ]
+    #     }
     xmat[i, 1] = maxtime
     
     colnames(xmat) = c("Time", rownames(s))
