@@ -31,24 +31,25 @@ lnastep = function(model, z, m, ddt)
 #' @title Stochastic simulation using the linear noise approximation
 #' @inheritParams deterministic
 #' @inheritParams diffusion
-#' @param restart a logical value. The default value of FALSE runs the standard
-#' linear noise approximation. A value of TRUE runs the algorithm of Fearnhead, Giagos, and
-#' Sherlock, 2012.
+#' @param restart a logical value. The default value of FALSE runs the standard 
+#'   linear noise approximation. A value of TRUE runs the algorithm of 
+#'   Fearnhead, Giagos, and Sherlock, 2012.
+#' @param noise a logical value (default TRUE). If TRUE, noise added at each ddt
+#'   value.
 #' @author Colin Gillespie
-#' @return  A matrix. The first column contains the simulation time, the other columns contain the species 
-#' levels
+#' @return  A matrix. The first column contains the simulation time, the other 
+#'   columns contain the species levels
 #' @keywords character
-#' @importFrom MASS mvrnorm
 #' @export
 #' @examples demo(lv)
 #' lna(model, 10, 0.1)
-lna = function(model, maxtime, ddt, restart=FALSE) 
+lna = function(model, maxtime, ddt, restart=FALSE, noise=TRUE) 
 {
     z = model$get_initial()
     N = max((maxtime+.Machine$double.eps^0.5)/ddt + 1, 2)
     xmat = matrix(0, nrow=N, ncol=length(z)+1)
     xmat[1,] = c(0, z)
-    ##Initialise m and V
+    ## Initialise m and V
     m = z*0
     V = matrix(0, length(z), length(z))
     
@@ -56,9 +57,12 @@ lna = function(model, maxtime, ddt, restart=FALSE)
         lsol = lnastep(model, z, m, ddt)
         z = lsol[["z"]]
         
-        new_x = mvrnorm(1, z + lsol[["m"]], lsol[["V"]])
-        while(any(new_x < 0)) {
+        new_x = z + lsol[["m"]]
+        if(noise) {
             new_x = mvrnorm(1, z + lsol[["m"]], lsol[["V"]])
+            while(any(new_x < 0)) {
+                new_x = mvrnorm(1, z + lsol[["m"]], lsol[["V"]])
+            }
         }
         xmat[i, ] = c(xmat[i-1, 1] + ddt, new_x)
         
