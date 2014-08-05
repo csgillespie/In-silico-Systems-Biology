@@ -13,8 +13,9 @@ Description: This repository contains the latex source,
     Press. This book is part of the `Methods in Molecular
     Biology` series. The authors of this chapter are Andrew
     Golightly and Colin Gillespie.
+Depends:
+    MASS
 Imports:
     deSolve,
-    MASS,
     parallel
 License: GPL
