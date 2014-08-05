@@ -1,3 +1,7 @@
+== Version 0.13.3 ==
+    * Bug fix: Outputing at edges of the gillespie simulator
+    * Added a noise parameter to the LNA method
+
 == Version 0.13.2 ==
     * Update roxygen docs
     * set_seed argument added to multiple_sims
