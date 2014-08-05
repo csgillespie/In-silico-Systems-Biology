@@ -18,7 +18,7 @@ create_model = function(stoic, hazards, initial, pars, jacobian=NULL) {
     get_stoic = function() stoic
     get_haz = function(x, p=pars)  hazards(x, p)
     get_pars = function(p=pars)  {pars <<- p; pars}
-    get_initial = function(i = initial) i
+    get_initial = function(i = initial) {initial <<- i; initial}
     get_jacobian = function(x, p=pars) jacobian(x, p)
     m = list(get_stoic = get_stoic, get_haz=get_haz, 
             get_pars=get_pars, get_initial=get_initial, 
